@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @section Scripts {
+        @if (TempData["success"] != null)
+        {
+            <script>
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    timeOut: 5000,
+                    extendedTimeOut: 2000,
+                    positionClass: "toast-top-right"
+                };
+
+                toastr.success(
+                    '<strong>Thank you for sharing your experience!</strong><br>Your review has been successfully submitted and means a lot to us. We’re always striving to improve, and your feedback helps us grow.<br>We look forward to serving you again soon!',
+                    'Review Submitted'
+                );
+            </script>
+        }
+    }
+
+    <style>
+         .toast-success {
+            background-color: #ffc107 !important;  
+            color: #000 !important; 
+            border: 1px solid #e0a800;  
+        }
+
+            .toast-success .toast-title {
+                font-weight: bold;
+            }
+    </style>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .restaurant-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+            .social-buttons a {
+                text-decoration: none;
+                padding: 10px 20px;
+                color: white;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+        }
+
+        .call {
+            background-color: #34b7f1;
+        }
+
+        .email {
+            background-color: #dd4b39;
+        }
+
+        .rating {
+            text-align: center;
+            font-size: 24px;
+            color: gold;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+            .rating i {
+                margin: 0 5px;
+                font-size: 30px;
+            }
+
+        .review-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                resize: none;
+                font-size: 16px;
+            }
+
+            .form-group button {
+                background-color: #ffcc00;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                width: 100%;
+                cursor: pointer;
+            }
+
+                .form-group button:hover {
+                    background-color: #e0a800;
+                }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: green;
+        }
+    </style>
+    <a href="/Customer/Home/reviews" class="btn-floating">reviews</a>
+
+    <style>
+        .btn-floating {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffc107;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-floating:hover {
+                background-color: #ff9800;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+            }
+    </style>
+
+</head>
+<body>
+    <div class="container mt-4">
+        <img src="~/Images/WhatsApp Image 2024-11-26 at 01.12.11_6f331487.jpg" class="restaurant-image" alt="Restaurant Image" />
+        <div class="social-buttons">
+            <a href="https://www.facebook.com/mlookelsa3adablabn" class="facebook" target="_blank">Facebook</a>
+            <a href="https://wa.me/01026739351" class="whatsapp" target="_blank">WhatsApp</a>
+            <a href="https://t.me/Shawky2226" class="call" target="_blank">Telegram</a>
+            <a href="mailto:mahmoudshawky495@gmail.com" class="email">Email</a>
+        </div>
+    </div>
+
+     <div class="review-section">
+        <h3>Rate Our Restaurant</h3>
+
+        <div class="rating">
+            <span>Your Rating:</span>
+            <i class="fas fa-star" data-value="1"></i>
+            <i class="fas fa-star" data-value="2"></i>
+            <i class="fas fa-star" data-value="3"></i>
+            <i class="fas fa-star" data-value="4"></i>
+            <i class="fas fa-star" data-value="5"></i>
+        </div>
+
+        <form id="reviewForm" method="post" action="/Customer/Home/SubmitReview">
+            <div class="form-group">
+                <label for="userName">Your Name</label>
+                <input type="text" id="userName" name="Name" placeholder="Enter your name..." required />
+            </div>
+
+            <input type="hidden" id="Date" name="Date" />
+
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="Email" placeholder="Enter your email..." required />
+            </div>
+
+            <div class="form-group">
+                <label for="reviewText">Write Your Review</label>
+                <textarea id="reviewText" name="Review" placeholder="Write your thoughts about our food and service..." required></textarea>
+            </div>  
+ 
+            <input type="hidden" id="rating" name="Rating" value="0" />
+          
+
+
+
+
+            <div class="form-group">
+                <button type="submit">Submit Review</button>
+            </div>
+        </form>
+        <script>
+             document.getElementById("Date").value = new Date().toISOString();     
+        </script>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedRating = 0;
+
+        const stars = document.querySelectorAll('.rating i');
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                selectedRating = parseInt(this.getAttribute('data-value'));
+                updateStarRating();
+                document.getElementById('rating').value = selectedRating; 
+            });
+        });
+
+        function updateStarRating() {
+            stars.forEach(star => {
+                const value = parseInt(star.getAttribute('data-value'));
+                if (value <= selectedRating) {
+                    star.classList.add('fas');
+                    star.classList.remove('far');
+                } else {
+                    star.classList.add('far');
+                    star.classList.remove('fas');
+                }
+            });
+        }
+
+        document.getElementById("reviewForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const userName = document.getElementById("userName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const reviewText = document.getElementById("reviewText").value.trim();
+
+            if (selectedRating === 0) {
+                document.getElementById("message").textContent = "Please select a rating!";
+                document.getElementById("message").style.color = "red";
+            } else if (!userName || !email || !reviewText) {
+                document.getElementById("message").textContent = "All fields are required!";
+                document.getElementById("message").style.color = "red";
+            } else {
+                this.submit(); 
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿ @using Models
+ @model SubmitReview
+<div class="row mb-3">
+    <h2><a href="/Admin/Review/Index"><i class="bi bi-arrow-left"></i></a> Create New Review</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Review" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+            <label for="Name" class="form-label">  Name</label>
+            <input class="form-control" name="Name">
+        </div>    
+        <div class="mb-3">
+
+            <label for="Email" class="form-label"> Email</label>
+            <input class="form-control" name="Email">
+        </div>
+        <div class="mb-3">
+
+            <label for="Date" class="form-label"> Date</label>
+            <input type="date" class="form-control" name="Date">
+        </div>
+
+        <div class="mb-3">
+            <label for="Review" class="form-label">Review</label>
+            <input class="form-control" name="Review">
+        </div>
+        <div class="mb-3">
+
+            <label for="Rating" class="form-label">Rating</label>
+            <input class="form-control" name="Rating">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

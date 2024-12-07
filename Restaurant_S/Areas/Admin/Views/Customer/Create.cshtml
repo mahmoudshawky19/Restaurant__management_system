@@ -1,0 +1,35 @@
+﻿ @using  Models
+ @model Customer
+<div class="row mb-3">
+    <h2><a href="/Admin/Customer/Index"><i class="bi bi-arrow-left"></i></a> Create New Customer</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Customer" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Customer Name</label>
+            <input class="form-control" name="Name">
+        </div>
+        <div class="mb-3">
+            <label for="ZipCode" class="form-label">Code</label>
+            <input class="form-control" name="ZipCode">
+        </div>
+        <div class="mb-3">
+
+            <label for="phoneNumber" class="form-label">phoneNumber</label>
+            <input class="form-control" name="phoneNumber">
+        </div>
+        <div class="mb-3">
+
+            <label for="Address" class="form-label"> Address</label>
+            <input class="form-control" name="Address">
+        </div>
+        <div class="mb-3">
+
+            <label for="Email" class="form-label"> Email</label>
+            <input class="form-control" name="Email">
+        </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+  

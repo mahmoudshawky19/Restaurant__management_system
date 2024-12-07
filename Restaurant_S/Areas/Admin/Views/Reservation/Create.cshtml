@@ -1,0 +1,71 @@
+﻿<div class="row mb-3">
+    <h2><a href="/Admin/Reservation/Index"><i class="bi bi-arrow-left"></i></a> Create New Reservation</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Reservation" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+            <label for="MovieId" class="form-label">Select Customer</label>
+            <select class="form-select" name="CustomerId">
+                @foreach (var item in ViewBag.a)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+
+        </div>
+        <a href="/Customer/Create" type="button" class="btn btn-outline-primary">Create new Customer</a>
+
+        <div class="mb-3">
+            <label for="MovieId" class="form-label">Select table number</label>
+            <select class="form-select" name="RestaurantTableId">
+                @foreach (var item in ViewBag.b)
+                {
+                    <option value="@item.Id">@item.tableNumber</option>
+                }
+            </select>
+
+        </div>
+        <div class="mb-3">
+
+            <label for="ReservationDate" class="form-label">Reservation Date</label>
+            <input type="datetime-local" class="form-control" id="Name" name="ReservationDate" />
+        </div>        
+        <div class="mb-3">
+
+            <label for="Time" class="form-label">Reservation Duration</label>
+            <input type="time" class="form-control" name="Time">
+        </div>
+
+
+        <div class="mb-3">
+
+            <label for="numberOfGuests" class="form-label">number of guests</label>
+            <input class="form-control" name="numberOfGuests">
+        </div>
+
+
+        <button   type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml"></partial>
+}  <script>
+       function previewImage(event) {
+           const file = event.target.files[0];
+           const preview = document.getElementById('imagePreview');
+
+           if (file) {
+               const reader = new FileReader();
+               reader.onload = function (e) {
+                   preview.src = e.target.result;
+                   preview.style.display = 'block';
+               }
+               reader.readAsDataURL(file);
+           } else {
+               preview.src = '';
+               preview.style.display = 'none';
+           }
+       }
+</script>

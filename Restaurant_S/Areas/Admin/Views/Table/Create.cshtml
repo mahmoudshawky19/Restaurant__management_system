@@ -1,0 +1,49 @@
+﻿<div class="row mb-3">
+    <h2><a href="/Admin/Table/Index"><i class="bi bi-arrow-left"></i></a> Create New Table</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Table" enctype="multipart/form-data" method="post">
+
+        <div class="mb-3">
+
+            <label for="tableNumber" class="form-label">tableNumber</label>
+            <input class="form-control" id="Name" name="tableNumber" />
+        </div>
+        <div class="mb-3">
+
+            <label for="Capacity" class="form-label">Capacity</label>
+            <input class="form-control" name="Capacity">
+        </div>
+
+        <div class="mb-3">
+
+            <label for="Location" class="form-label">Location</label>
+            <input class="form-control" name="Location">
+        </div>
+ 
+
+        <button href="/Table/Details" type="submit" class="btn btn-primary">Submit</butto>
+    </form>
+
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml"></partial>
+}  <script>
+       function previewImage(event) {
+           const file = event.target.files[0];
+           const preview = document.getElementById('imagePreview');
+
+           if (file) {
+               const reader = new FileReader();
+               reader.onload = function (e) {
+                   preview.src = e.target.result;
+                   preview.style.display = 'block';
+               }
+               reader.readAsDataURL(file);
+           } else {
+               preview.src = '';
+               preview.style.display = 'none';
+           }
+       }
+</script>

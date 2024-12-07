@@ -1,0 +1,141 @@
+﻿@section Scripts {
+    @if (@TempData["success"] != null)
+    {
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "timeOut": "3000",
+            };
+
+            toastr.success('@TempData["success"]');
+        </script>
+    }
+}
+
+<div class="container my-5">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">📋 Reviews</h2>
+        <a href="/Admin/Review/Create" class="btn btn-success btn-lg">
+            <i class="bi bi-plus-circle-fill"></i> Create New Review
+        </a>
+    </div>
+
+    <!-- Search Form -->
+    <form action="/Admin/Review/Index" method="get" class="d-flex mb-4">
+        <input type="text"
+               class="form-control me-2 rounded-pill"
+               placeholder="🔍 Search reviews..."
+               name="search"
+               value="@ViewContext.HttpContext.Request.Query["search"]">
+        <button type="submit" class="btn btn-primary rounded-pill px-4">Search</button>
+    </form>
+
+    <!-- Reviews Table -->
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle bg-white">
+            <thead class="bg-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Review</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td><i class="bi bi-envelope"></i> @item.Email</td>
+                        <td>
+                            @if (item.Review.Length > 50)
+                            {
+                                <span title="@item.Review">@item.Review.Substring(0, 50)...</span>
+                            }
+                            else
+                            {
+                                @item.Review
+                            }
+                        </td>
+                        <td>
+                            <a href="/Admin/Review/Edit?id=@item.Id" class="btn btn-warning btn-sm text-white me-2">
+                                <i class="bi bi-pencil-fill"></i> Edit
+                            </a>
+                            <button type="button"
+                                    class="btn btn-danger btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-id="@item.Id"
+                                    data-name="@item.Name">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Review", new { page = ViewBag.CurrentPage - 1 })">❮ Previous</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Review", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Review", new { page = ViewBag.CurrentPage + 1 })">Next ❯</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the review by <strong id="reviewName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteId;
+    let deleteName;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const deleteButtons = document.querySelectorAll('button[data-bs-target="#deleteModal"]');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                deleteId = this.getAttribute('data-id');
+                deleteName = this.getAttribute('data-name');
+                document.getElementById('reviewName').textContent = deleteName;
+            });
+        });
+
+        document.getElementById('confirmDelete').addEventListener('click', function () {
+            window.location.href = '/Admin/Review/Delete?id=' + deleteId;
+        });
+    });
+</script>

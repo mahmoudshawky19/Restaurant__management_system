@@ -1,0 +1,35 @@
+﻿@using Models
+@model Supplier
+<div class="row mb-3">
+    <h2><a href="/Admin/Supplier/Index"><i class="bi bi-arrow-left"></i></a> Edit Supplier: @Model.Name  </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="Supplier" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+
+            <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+            <label for="Name" class="form-label">Supplier Name</label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="PhoneNumber" class="form-label">PhoneNumber</label>
+            <input asp-for="PhoneNumber" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Address" class="form-label"> Address</label>
+            <input asp-for="Address" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Email" class="form-label"> Email</label>
+            <input asp-for="Email" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

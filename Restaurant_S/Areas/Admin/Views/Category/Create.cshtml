@@ -1,0 +1,20 @@
+﻿ @using Models
+ @model Category
+<div class="row mb-3">
+    <h2><a href="/Admin/Category/Index"><i class="bi bi-arrow-left"></i></a> Create New Category</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Category" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Customer Name</label>
+            <input class="form-control" name="Name">
+        </div>
+         <div class="mb-3">
+
+            <label for="Description" class="form-label"> Description</label>
+            <input class="form-control" name="Description">
+        </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

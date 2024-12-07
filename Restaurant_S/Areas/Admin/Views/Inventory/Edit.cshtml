@@ -1,0 +1,40 @@
+﻿@using Models
+@model Inventory
+<div class="row mb-3">
+    <h2><a href="/Admin/Inventory/Index"><i class="bi bi-arrow-left"></i></a> Edit Inventory: @Model.Name  </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="Inventory" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+
+            <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+            <label for="Name" class="form-label">Inventory Name</label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Quantity" class="form-label">Quantity</label>
+            <input asp-for="Quantity" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="UnitPrice" class="form-label"> UnitPrice</label>
+            <input asp-for="UnitPrice" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="MovieId" class="form-label">Select Supplier</label>
+            <select class="form-select" name="SupplierId">
+                @foreach (var item in ViewBag.a)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+
+         </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

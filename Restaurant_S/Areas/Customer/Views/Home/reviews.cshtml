@@ -1,0 +1,77 @@
+﻿@model List<SubmitReview>
+
+<div class="container mt-5">
+    <h3 class="mb-4 text-center">Customer Reviews</h3>
+
+    @foreach (var item in Model)
+    {
+        <div class="review-card shadow-sm p-4 mb-4 rounded bg-light">
+            <div class="d-flex align-items-center mb-3">
+                <div class="avatar me-3">
+                 </div>
+                <div>
+                    <h5 class="mb-1 text-primary">@item.Name</h5>                     
+                     <p class="text-muted mb-0">@item.Email</p>
+
+                    <p class="text-muted mb-0">@item.Date.ToString("MMMM dd, yyyy")</p>
+                </div>
+            </div>
+
+            <div class="rating mb-3">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <i class="fas fa-star @((i <= item.Rating) ? "text-warning" : "text-secondary")"></i>
+                }
+            </div>
+
+            <p class="review-text">@item.Review</p>
+        </div>
+    }
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/font-awesome@6.0.0-beta3/js/all.min.js"></script>
+
+<style>
+     .review-card {
+        border: none;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+    .avatar img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #007bff;
+    }
+
+    .review-text {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .rating i {
+        font-size: 18px;
+        margin-right: 2px;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-secondary {
+        color: #6c757d !important;
+    }
+
+    .text-warning {
+        color: #ffc107 !important;
+    }
+</style>

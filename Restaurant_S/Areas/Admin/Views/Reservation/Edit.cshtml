@@ -1,0 +1,56 @@
+﻿ @using Models
+
+ @model Reservation
+<div class="row mb-3">
+    <h2><a href="/Admin/Reservation/Index"><i class="bi bi-arrow-left"></i></a> Edit Reservation </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="Reservation" enctype="multipart/form-data" method="post">
+        <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+        <div class="mb-3">
+            <label for="MovieId" class="form-label">Select Customer</label>
+            <select class="form-select" name="CustomerId">
+                @foreach (var item in ViewBag.a)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+
+        </div>
+        <div class="mb-3">
+            <label for="MovieId" class="form-label">Select table number</label>
+            <select class="form-select" name="RestaurantTableId">
+                @foreach (var item in ViewBag.b)
+                {
+                    <option value="@item.Id">@item.tableNumber</option>
+                }
+            </select>
+
+        </div>
+        <div class="mb-3">
+
+            <label for="ReservationDate" class="form-label">Reservation Date</label>
+            <input type="datetime-local" class="form-control" id="Name" name="ReservationDate" value="@Model.ReservationDate.ToString("yyyy-MM-ddTHH:mm")">
+        </div>
+        <div class="mb-3">
+
+            <label for="Time" class="form-label">Reservation Duration</label>
+            <input type="time" class="form-control" name="Time" value="@Model.Time">
+        </div>
+
+
+        <div class="mb-3">
+
+            <label for="numberOfGuests" class="form-label">number of guests</label>
+            <input class="form-control" name="numberOfGuests" value="@Model.numberOfGuests">
+        </div>
+
+ 
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

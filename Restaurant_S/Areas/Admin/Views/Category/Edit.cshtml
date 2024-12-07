@@ -1,0 +1,25 @@
+﻿  @using   Models
+ @model Category
+<div class="row mb-3">
+    <h2><a href="/Admin/Category/Index"><i class="bi bi-arrow-left"></i></a> Edit Category: @Model.Name  </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="Category" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+
+            <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+            <label for="Name" class="form-label">Category Name</label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Description" class="form-label">Description</label>
+            <input asp-for="Description" class="form-control">
+        </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

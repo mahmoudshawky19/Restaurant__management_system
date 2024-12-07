@@ -1,0 +1,74 @@
+﻿ @model MenuItem
+<div class="row mb-3">
+    <h2><a href="/ShowOff/Index"><i class="bi bi-arrow-left"></i></a> Create New Offer</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="ShowOff" enctype="multipart/form-data" method="post">
+
+        <div class="mb-3">
+
+            <label for="Name" class="form-label">Name</label>
+            <input class="form-control" id="Name" name="Name" />
+        </div>
+        <div class="mb-3">
+
+            <label for="Description" class="form-label">Description</label>
+            <input class="form-control" name="Description">
+        </div>
+        <div class="mb-3">
+
+            <label for="Price" class="form-label">Price Before</label>
+            <input class="form-control" name="PriceBefore">
+        </div>
+
+        <div class="mb-3">
+
+            <label for="Price" class="form-label">Price After</label>
+            <input class="form-control" name="PriceAfter">
+        </div>
+        <div class="mb-3">
+            <label for="CategoryId" class="form-label">Select Category</label>
+            <select class="form-select" name="CategoryId">
+                @foreach (var item in ViewBag.a)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+
+        </div>
+
+
+        <div class="mb-3">
+            <label for="ImgUrl" class="form-label">Image</label>
+            <input type="file" class="form-control" id="ImgUrl" name="ImgUrl" onchange="previewImage(event)">
+            <!-- Image preview --> </br>
+            <img id="imagePreview" src="#" alt="Image Preview" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+        </div>
+
+
+
+        <button href="/MenuItem/Details" type="submit" class="btn btn-primary">Submit</butto>
+    </form>
+
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml"></partial>
+}  <script>
+       function previewImage(event) {
+           const file = event.target.files[0];
+           const preview = document.getElementById('imagePreview');
+
+           if (file) {
+               const reader = new FileReader();
+               reader.onload = function (e) {
+                   preview.src = e.target.result;
+                   preview.style.display = 'block';
+               }
+               reader.readAsDataURL(file);
+           } else {
+               preview.src = '';
+               preview.style.display = 'none';
+           }
+       }
+</script>

@@ -1,0 +1,45 @@
+﻿@using Models
+@model List<RestaurantTable>
+<div class="row mb-3">
+    <div class="col-9">
+        <h2>Reserved Tables</h2>
+    </div>
+</div>
+<a href="/Admin/Reservation/Index">
+    <button class="btn btn-outline-primary">Go to Reservation</button>
+</a>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Table Number</th>
+            <th scope="col">status</th>
+         </tr>
+    </thead>
+    <tbody>
+        @foreach (var table in Model)
+        {
+         
+                <tr class="table-light">
+                    <th scope="row">@table.Id</th>
+                    <td>@table.tableNumber</td>
+                @if (table.reservations.Any())
+                {
+                    <td>
+                        <button href="/Reservation/Index" class="btn btn-dark disabled">Reserved</button>
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        <button href="/Reservation/Index" class="btn btn-success">Available</button>
+                    </td>
+                }
+             </tr>
+            }
+        
+        
+    </tbody>
+</table>

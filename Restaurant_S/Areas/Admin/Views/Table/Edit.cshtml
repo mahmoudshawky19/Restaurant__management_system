@@ -1,0 +1,30 @@
+﻿@using Models
+ @model RestaurantTable
+<div class="row mb-3">
+    <h2><a href="/Admin/Table/Index"><i class="bi bi-arrow-left"></i></a> Edit Table:   </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="Table" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+
+            <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+            <label for="tableNumber" class="form-label">tableNumber</label>
+            <input asp-for="tableNumber" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Capacity" class="form-label">Capacity</label>
+            <input asp-for="Capacity" class="form-control">
+        </div>
+        <div class="mb-3">
+
+            <label for="Location" class="form-label"> Location</label>
+            <input asp-for="Location" class="form-control">
+        </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>

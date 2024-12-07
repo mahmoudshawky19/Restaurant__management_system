@@ -1,0 +1,54 @@
+﻿<div class="row mb-3">
+    <h2><a href="/Admin/Supplier/Index"><i class="bi bi-arrow-left"></i></a> Create New Supplier</h2>
+</div>
+
+<div class="row">
+    <form asp-action="Create" asp-controller="Supplier" enctype="multipart/form-data" method="post">
+ 
+        <div class="mb-3">
+
+            <label for="Name" class="form-label">Name</label>
+            <input  class="form-control" id="Name" name="Name" />
+        </div>
+        <div class="mb-3">
+
+            <label for="PhoneNumber" class="form-label"> Phone Number  </label>
+            <input class="form-control" name="PhoneNumber">
+        </div>
+
+        <div class="mb-3">
+
+            <label for="Address" class="form-label">Address</label>
+            <input class="form-control" name="Address">
+        </div> 
+        <div class="mb-3">
+
+            <label for="Email" class="form-label">Email</label>
+            <input class="form-control" name="Email">
+        </div>
+ 
+
+        <button href="/Supplier/Details" type="submit" class="btn btn-primary">Submit</butto>
+    </form>
+
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml"></partial>
+}  <script>
+       function previewImage(event) {
+           const file = event.target.files[0];
+           const preview = document.getElementById('imagePreview');
+
+           if (file) {
+               const reader = new FileReader();
+               reader.onload = function (e) {
+                   preview.src = e.target.result;
+                   preview.style.display = 'block';
+               }
+               reader.readAsDataURL(file);
+           } else {
+               preview.src = '';
+               preview.style.display = 'none';
+           }
+       }
+</script>

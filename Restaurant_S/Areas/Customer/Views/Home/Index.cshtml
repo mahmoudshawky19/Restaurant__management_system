@@ -1,0 +1,168 @@
+﻿@section Styles {
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .btn-outline-primary {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+        .price-badge {
+            background-color: #ffc107;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .row {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        /* تحجيم الأعمدة للصفحة الكبيرة والمتوسطة */
+        .col-lg-4, .col-md-6, .col-12 {
+            margin-bottom: 15px;
+        }
+
+        .btn-offer {
+            background-color: #ff5722;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+            .btn-offer:hover {
+                background-color: #e64a19;
+                transform: scale(1.05);
+            }
+
+            .btn-offer:active {
+                transform: scale(1);
+            }
+
+        .btn-offer {
+            background-color: #ff5722;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px; /* إضافة مسافة بين الزر والكارد */
+        }
+
+            .btn-offer:hover {
+                background-color: #e64a19;
+                transform: scale(1.05);
+            }
+
+            .btn-offer:active {
+                transform: scale(1);
+            }
+
+ 
+        .btn-offer {
+            position: fixed;
+            top: 50px; /* المسافة من أعلى الصفحة لضمان عدم تغطيته على الهيدر */
+            right: 20px; /* المسافة من اليمين */
+            background-color: #ffc107; /* اللون الأصفر */
+            color: white;
+            font-size: 14px; /* تصغير حجم الخط */
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            padding: 8px 16px; /* تقليل المسافة حول النص داخل الزر */
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            z-index: 1000; /* لضمان أن الزر فوق باقي العناصر */
+        }
+
+            .btn-offer:hover {
+                background-color: #ffca28; /* ظل أصفر أفتح عند المرور */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+            }
+
+
+
+
+
+    </style>
+}
+<br />
+<br />
+<br />
+<div class="row">
+    @foreach (var items in Model)
+    {
+        <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <div class="card" style="width: 100%; position: relative;">
+                  <div class="card-header text-center">
+                    <h5 class="card-title">@items.Name</h5>
+                </div>
+
+                <img src="~/Images/@items.ImgUrl" class="card-img-top" alt="Image of @items.Name">
+
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Price:</strong>
+                        <span class="price-badge">@items.PriceAfter</span>
+                    </p>
+
+                    <p class="card-text"><strong>Description:</strong> @items.Description</p>
+                    <a href="/Customer/Home/Details?id=@items.Id" class="btn btn-outline-primary w-100">More Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<a href="/Customer/Offer/Offer" class="btn-offer">Offers</a>

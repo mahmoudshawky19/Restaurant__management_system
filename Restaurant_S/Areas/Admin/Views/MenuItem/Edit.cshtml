@@ -1,0 +1,49 @@
+﻿@using Models
+@model MenuItem
+<div class="row mb-3">
+    <h2><a href="/Admin/menuItem/Index"><i class="bi bi-arrow-left"></i></a> Edit menuItem </h2>
+</div>
+
+<div class="row">
+
+    <form asp-action="Edit" asp-controller="menuItem" enctype="multipart/form-data" method="post">
+        <input type="hidden" class="form-control" id="CinemaName" name="Id" value="@Model.Id">
+
+          <div class="mb-3">
+
+            <label for="Name" class="form-label">Name</label>
+            <input   class="form-control" id="menuItemDate" name="Name" value="@Model.Name">
+        </div>
+        <div class="mb-3">
+
+            <label for="Price" class="form-label"> Price</label>
+            <input class="form-control" name="PriceAfter" value="@Model.PriceAfter">
+        </div>
+        <div class="mb-3">
+
+            <input type="hidden" class="form-control" name="PriceBefore" value="0">
+        </div>
+        <div class="mb-3">
+
+            <label for="Description" class="form-label">Description</label>
+            <input class="form-control" name="Description" value="@Model.Description">
+        </div>
+        <div class="mb-3">
+            <label for="CategoryId" class="form-label">Select Category</label>
+            <select class="form-select" name="CategoryId">
+                @foreach (var item in ViewBag.a)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+
+        </div>
+        <label for="ImgUrl" class="form-label">Profile Picture</label>
+        <input type="file" class="form-control" id="ProfilePicture" name="ImgUrl" onchange="previewImage(event)">
+        <!-- Image preview --> </br >
+        <img id="imagePreview" src="~/Images/@Model.ImgUrl" alt="Image Preview" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+        </br>
+        <button  type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
